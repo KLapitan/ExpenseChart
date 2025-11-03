@@ -41,7 +41,27 @@ return(
         <BarChart data={exampleData}>
         <XAxis dataKey="day" axisLine={false} tickLine={false}/>
         <YAxis hide/>
-        
+        <Tooltip
+  cursor={{ fill: "rgba(0,0,0,0.1)" }}
+  content={({ payload, label, active }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div
+          style={{
+            backgroundColor: "#333",
+            borderRadius: "8px",
+            padding: "5px 10px",
+            color: "#fff",
+          }}
+        >
+          <strong>{label}</strong>: ${payload[0].value} 
+        </div>
+      );
+    }
+    return null;
+  }}
+/>
+
               <Bar dataKey="amount">
         {exampleData.map((entry, index) => (
           <Cell
